@@ -10,16 +10,9 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title=settings.PROJECT_NAME)
 
-# CONFIGURACIÓN CORS ROBUSTA
-origins = [
-    "http://localhost:5173",    # Vite Local
-    "http://127.0.0.1:5173",    # Vite Local IP
-    "http://localhost:3000",    # React standard (por si acaso)
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,      # Lista explícita es más segura que ["*"] con credenciales
+    allow_origins=["*"],      # Lista explícita es más segura que ["*"] con credenciales
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
