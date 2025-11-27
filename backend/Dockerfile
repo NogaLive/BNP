@@ -1,26 +1,24 @@
-# Usar una imagen ligera de Python
+# Usar una imagen oficial ligera de Python
 FROM python:3.11-slim
 
-# Evita que Python genere archivos .pyc y buffer de salida
+# Variables para optimizar Python en Docker
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+# Asegurar que Python encuentre los módulos en la carpeta raíz
+ENV PYTHONPATH=/app
 
-# Directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Instalar dependencias del sistema necesarias para compilar (opcional pero recomendado)
+# Instalar dependencias del sistema (necesario para algunas libs de Python)
 RUN apt-get update && apt-get install -y gcc libpq-dev && rm -rf /var/lib/apt/lists/*
 
-# Copiar dependencias e instalarlas
+# Copiar y e instalar requerimientos
 COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-# Copiar el código del proyecto
+# Copiar el resto del código
 COPY . .
 
-# Exponer el puerto que usa Cloud Run (por defecto 8080)
-ENV PORT=8080
-
-# Comando para iniciar la aplicación
-# OJO: Cloud Run inyecta la variable $PORT automáticamente
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]
+# Comando de inicio explícito usando la variable de entorno PORT
+# Cloud Run inyecta PORT=8080 por defecto
+CMD uvicorn app.main:app --host 0.0.0.0 --port $PORT
