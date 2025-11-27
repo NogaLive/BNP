@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+  body {
+    font-family: 'Roboto', sans-serif;
+    @apply bg-neutral-50 text-neutral-800;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  input[type="time"],
+  input[type="number"],
+  select {
+    @apply border border-neutral-200 p-2.5 rounded-lg transition duration-150 focus:border-accent focus:ring-1 focus:ring-accent outline-none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-bold py-2.5 px-6 rounded-lg shadow-md hover:bg-red-700 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-secondary text-white font-bold py-2.5 px-6 rounded-lg shadow-md hover:bg-secondary/90 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}
+
+/* --- Personalización de React Calendar para Gob.pe --- */
+.react-calendar {
+  width: 100%;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.125em;
+  padding: 10px;
+}
+
+.react-calendar--doubleView {
+  width: 700px;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Navegación (Mes/Año) */
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #003B5C; /* Azul Institucional */
+  border-radius: 8px;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #f3f4f6;
+}
+
+/* Días de la semana */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  color: #6b7280;
+  text-decoration: none;
+}
+
+/* Días (Tiles) */
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.react-calendar__tile:disabled {
+  background-color: #f9fafb;
+  color: #d1d5db;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #eff6ff;
+  color: #1D72C2;
+}
+
+/* Día seleccionado (Rango o Único) */
+.react-calendar__tile--active {
+  background: #003B5C !important; /* Azul Institucional */
+  color: white !important;
+}
+
+.react-calendar__tile--now {
+  background: #fff7ed;
+  color: #c2410c;
+  font-weight: bold;
+  border: 1px solid #ffedd5;
+}
+
+/* Rango seleccionado (Libros) */
+.react-calendar__tile--range {
+  background: #eff6ff;
+  color: #003B5C;
+}
+
+.react-calendar__tile--rangeStart,
+.react-calendar__tile--rangeEnd {
+  background: #D91023 !important; /* Rojo BNP */
+  color: white !important;
+}
